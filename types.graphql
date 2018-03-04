@@ -1,0 +1,66 @@
+type Window {
+  name: String,
+  owner: String,
+  focused: Boolean,
+  floating: String
+  desktop: Desktop
+}
+
+type Desktop {
+  id: Int,
+  focused: Boolean,
+  mode: String,
+  windows: [Window],
+  monitor: Monitor
+}
+
+type Monitor {
+  id: Int,
+  focused: Boolean,
+  desktops: [Desktop]
+}
+
+type Market {
+  symbol: String,
+  price: String,
+  rank: String
+}
+
+type Exchange {
+  name: String
+  market: Market
+}
+
+type JiraUser {
+  displayName: String,
+  name: String
+}
+
+type Issue {
+  key: String,
+  summary: String,
+  status: String,
+  assignee: JiraUser
+}
+
+type Battery {
+  hasbattery: Boolean,
+  ischarging: Boolean,
+  percent: Int
+}
+
+type WifiNetwork {
+  ssid: String
+}
+
+type System {
+  battery: Battery,
+  wifi: [WifiNetwork]
+}
+
+type Query {
+  system: System,
+  monitors: [Monitor],
+  jira(jql: String!): [Issue],
+  exchange(name: String!, symbol: String!): Exchange
+}

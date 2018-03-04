@@ -1,0 +1,82 @@
+* graphql
+
+personal extensible graphql server 
+
+** usage
+
+*** configuration
+
+define a config file ~config.json~ which has the following:
+
+#+begin_src json
+{
+  "jira": {
+    "protocol": "https",
+    "host": "<jira-host>",
+    "username": "<jira-username>",
+    "password": "<jira-password>",
+    "apiVersion": "2",
+    "strictSSL": true
+  }
+}
+#+end_src
+
+*** startup
+
+simply start the server with the following command:
+
+#+begin_src shell
+npm run server
+#+end_src
+
+*** graphiql
+
+interact with the server via the brower:
+
+http://localhost:3000/graphiql
+
+*** http request
+
+**** monitors query
+#+begin_src http :exports both :pretty
+POST http://localhost:3000/graphql
+Content-Type: application/json
+
+{
+  "query": " { monitors { id } }"
+}
+
+#+end_src
+
+#+RESULTS:
+#+begin_example
+{
+  "data": {
+    "monitors": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      }
+    ]
+  }
+}
+#+end_example
+
+** development
+
+*** compile
+
+#+begin_src shell
+npm run compile
+#+end_src
+
+***  add new resolver
+
+1. add new graphql types to ~types.graphql~
+2. create new source file in ~src/resolvers~ directory and export graphql schema
+3. import and add new resolver to list of resolvers in ~src/resolvers.ts~
