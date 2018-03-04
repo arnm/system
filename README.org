@@ -31,9 +31,7 @@ npm run server
 
 *** graphiql
 
-interact with the server via the brower:
-
-http://localhost:3000/graphiql
+explore the graphql queries with the UI [[http://localhost:3000/graphiql]]
 
 *** http request
 
